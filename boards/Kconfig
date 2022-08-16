@@ -1507,21 +1507,24 @@ config ARCH_BOARD_ADAFRUIT_FEATHER_RP2040
 	depends on ARCH_CHIP_RP2040
 	---help---
 		This is a port to the Adafruit Feather RP2040 board.
-		Support is derived from Raspberry Pi Pico support.
 
 config ARCH_BOARD_ADAFRUIT_KB2040
 	bool "Adafruit KB2040 board"
 	depends on ARCH_CHIP_RP2040
 	---help---
 		This is a port to the Adafruit KB2040 board.
-		Support is derived from Raspberry Pi Pico support.
 
 config ARCH_BOARD_ADAFRUIT_QT_PY_RP2040
 	bool "Adafruit QT Py RP2040 board"
 	depends on ARCH_CHIP_RP2040
 	---help---
 		This is a port to the Adafruit QT Py RP2040 board.
-		Support is derived from Raspberry Pi Pico support.
+
+config ARCH_BOARD_SEEED_WIO_RP2040_MINI
+	bool "Seeed WIO RP2040 mini"
+	depends on ARCH_CHIP_RP2040
+	---help---
+		This is a port to the Seeed WIO RP2040 mini board.
 
 config ARCH_BOARD_RX65N
 	bool "RX65N renesas board"
@@ -2710,6 +2713,7 @@ config ARCH_BOARD
 	default "adafruit-feather-rp2040"  if ARCH_BOARD_ADAFRUIT_FEATHER_RP2040
 	default "adafruit-kb2040"          if ARCH_BOARD_ADAFRUIT_KB2040
 	default "adafruit-qt-py-rp2040"    if ARCH_BOARD_ADAFRUIT_QT_PY_RP2040
+	default "seeed-wio-rp2040-mini"    if ARCH_BOARD_SEEED_WIO_RP2040_MINI
 	default "rx65n"                    if ARCH_BOARD_RX65N
 	default "rx65n-rsk1mb"             if ARCH_BOARD_RX65N_RSK1MB
 	default "rx65n-rsk2mb"             if ARCH_BOARD_RX65N_RSK2MB
@@ -3070,6 +3074,9 @@ source "boards/arm/rp2040/adafruit-kb2040/Kconfig"
 endif
 if ARCH_BOARD_ADAFRUIT_QT_PY_RP2040
 source "boards/arm/rp2040/adafruit-qt-py-rp2040/Kconfig"
+endif
+if ARCH_BOARD_SEEED_WIO_RP2040_MINI
+source "boards/arm/rp2040/seeed-wio-rp2040-mini/Kconfig"
 endif
 if ARCH_BOARD_ARDUINO_DUE
 source "boards/arm/sam34/arduino-due/Kconfig"
