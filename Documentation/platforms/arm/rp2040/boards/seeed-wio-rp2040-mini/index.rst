@@ -65,7 +65,7 @@ Pad   Signal     Notes
 8     GPIO6
 9     GPIO7
 10    GPIO12
-11    GPIO13
+11    GPIO13    also LED
 12    Ground
 13    GPIO14
 14    GPIO15
@@ -85,7 +85,22 @@ Pad   Signal     Notes
 28    VIN        +5V Supply to board
 ===== ========== ==========
 
-Separate pins for the Serial Debug Port (SDB) are available
+The following gpio pads are used internally to the wio rp2040.
+
+========== ==========
+Signal     Notes
+========== ==========
+GPIO8      spi1 rx
+GPIO9      spi1 csn
+GPIO10     spi1 sck
+GPIO11     spi1 rx
+GPIO20     i2c0 sda
+GPIO21     i2c0 scl
+GPIO22     
+GPIO23     
+GPIO24     
+GPIO25     
+========== ==========
 
 Power Supply 
 ============
