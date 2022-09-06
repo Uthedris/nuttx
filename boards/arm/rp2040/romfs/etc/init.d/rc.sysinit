@@ -1,0 +1,4 @@
+# Create a RAMDISK and mount it at /tmp
+mkrd -m 1 256
+mkfatfs /dev/ram1
+mount -t vfat /dev/ram1 /tmp
