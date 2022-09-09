@@ -31,6 +31,11 @@
 
 #include "rp2040_spi.h"
 
+#if defined(CONFIG_SPI_SLAVE_DRIVER) && defined(CONFIG_RP2040_SPI)
+#include <arch/chip/spi_slave.h>
+#include <nuttx/spi/slave.h>
+#endif
+
 /****************************************************************************
  * Public Functions
  ****************************************************************************/
@@ -42,6 +47,8 @@
  *   Initialize and register spi driver for the specified spi port
  *
  ****************************************************************************/
+
+#if defined(CONFIG_RP2040_SPI) && defined(CONFIG_SPI_DRIVER)
 
 int board_spidev_initialize(int port)
 {
@@ -67,3 +74,42 @@ int board_spidev_initialize(int port)
 
   return ret;
 }
+
+#endif /* defined(CONFIG_RP2040_SPI0) || defined(CONFIG_RP2040_SPI1) */
+
+/****************************************************************************
+ * Name: board_spi_slave_dev_initialize
+ *
+ * Description:
+ *   Initialize spi slave driver and register the /dev/spislv[n] device.
+ *
+ ****************************************************************************/
+
+#if defined(CONFIG_SPI_SLAVE_DRIVER) && defined(CONFIG_RP2040_SPI)
+
+int board_spi_slave_dev_initialize(int bus)
+{
+  struct spi_slave_ctrlr_s * ctrlr = NULL;
+
+#  ifdef CONFIG_RP2040_SPI0_SLAVE
+
+  if (bus == 0)
+    {
+      ctrlr = initialize_spi0_slave_ctrlr();
+    }
+
+#  endif
+
+#  ifdef CONFIG_RP2040_SPI1_SLAVE
+
+  if (bus == 1)
+    {
+      ctrlr = initialize_spi1_slave_ctrlr();
+    }
+
+#  endif
+
+  return (ctrlr == NULL) ? -EINVAL : spi_slave_register(ctrlr, bus);
+}
+
+#endif

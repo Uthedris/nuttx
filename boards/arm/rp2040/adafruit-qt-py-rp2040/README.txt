@@ -9,7 +9,7 @@ NuttX supports the following RP2040 capabilities:
   - UART  (console port)
     - GPIO 5 (UART1 RX) and GPIO 20 (UART1 TX) are used for the console.
   - I2C
-  - SPI (master only)
+  - SPI
   - DMAC
   - PWM
   - ADC
@@ -29,7 +29,6 @@ NuttX also provide support for these external devices:
   - WS2812 smart pixel support
 
 There is currently no direct user mode access to these RP2040 hardware features:
-  - SPI Slave Mode
   - SSI
   - RTC
   - Timers

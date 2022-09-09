@@ -113,7 +113,7 @@ endif # RP2040_UART1
 #  SPI Configuration
 #####################################################################
 
-if RP2040_SPI0
+if RP2040_SPI0 || RP2040_SPI0_SLAVE
 
   config RP2040_SPI0_RX_GPIO
    int "GPIO pin for SPI0 RX (0, 4, 16, or 20)"
@@ -121,16 +121,25 @@ if RP2040_SPI0
     range 0 20
     ---help---
       Refer to board documentation to see which pins are available.
+
       This line is also known as MISO when we are configured in
       SPI master mode.
 
   config RP2040_SPI0_CS_GPIO
    int "GPIO pin for SPI0 CSn (1, 5, 17, or 21)"
     default 17
-    range 1 21
+    range -1 21
     ---help---
       Refer to board documentation to see which pins are available.
 
+      For SPI master mode, this pin is not necessary and can be left
+      unused by the SPI driver by setting this value to -1.  Any GPIO
+      pin can be used by a master to select a slave.  Multiple slaves 
+      can be accessed by configuring manually configuring a separate
+      slave select for each.
+
+      For SPI slave mode, this pin must be configured.  Data will 
+      only be received or transmitted if this line is asserted.
 
   config RP2040_SPI0_SCK_GPIO
    int "GPIO pin for SPI0 SCK (2, 6, 18, or 22)"
@@ -152,7 +161,7 @@ endif # RP2040_SPI0
 
 #####################################################################
 
-if RP2040_SPI1
+if RP2040_SPI1 || RP2040_SPI1_SLAVE
 
   config RP2040_SPI1_RX_GPIO
    int "GPIO pin for SPI1 RX (8, 12, 24, or 28)"
@@ -166,9 +175,18 @@ if RP2040_SPI1
   config RP2040_SPI1_CS_GPIO
    int "GPIO pin for SPI1 CSn (9, 13, 25, or 29)"
     default 9
-    range 9 29
+    range -1 29
     ---help---
       Refer to board documentation to see which pins are available.
+
+      For SPI master mode, this pin is not necessary and can be left
+      unused by the SPI driver by setting this value to -1.  Any GPIO
+      pin can be used by a master to select a slave.  Multiple slaves 
+      can be accessed by configuring manually configuring a separate
+      slave select for each.
+
+      For SPI slave mode, this pin must be configured.  Data will 
+      only be received or transmitted if this line is asserted.
 
   config RP2040_SPI1_SCK_GPIO
    int "GPIO pin for SPI1 SCK (10, 14, or 26)"
@@ -212,7 +230,7 @@ endif # RP2040_I2C0 || RP2040_I2C0_SLAVE
 
 #####################################################################
 
-if RP2040_I2C1 || RP2040_I2C0_SLAVE
+if RP2040_I2C1 || RP2040_I2C1_SLAVE
 
   config RP2040_I2C1_SDA_GPIO
    int "GPIO pin for I2C1 SDA (2, 6, 10, 14, 18, 22, or 26)"

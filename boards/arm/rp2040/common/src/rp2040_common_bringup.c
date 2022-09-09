@@ -37,6 +37,11 @@
 #include "rp2040_pico.h"
 #include "rp2040_common_bringup.h"
 
+
+#if defined(CONFIG_SPI_SLAVE_DRIVER) && defined(CONFIG_RP2040_SPIR)
+#include "../include/rp2040_spidev.h"
+#endif
+
 #ifdef CONFIG_LCD_BACKPACK
 #include "rp2040_lcd_backpack.h"
 #endif
@@ -110,7 +115,7 @@ int rp2040_common_bringup(void)
   struct mtd_dev_s *mtd_dev;
 #endif
 
-#ifdef CONFIG_RP2040_I2C_DRIVER
+#ifdef CONFIG_I2C_DRIVER
   #ifdef CONFIG_RP2040_I2C0
   ret = board_i2cdev_initialize(0);
   if (ret < 0)
@@ -130,7 +135,7 @@ int rp2040_common_bringup(void)
   #endif
 #endif
 
-#ifdef CONFIG_RP2040_SPI_DRIVER
+#if defined(CONFIG_RP2040_SPI) && defined(CONFIG_SPI_DRIVER)
   #ifdef CONFIG_RP2040_SPI0
   ret = board_spidev_initialize(0);
   if (ret < 0)

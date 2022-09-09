@@ -16,7 +16,7 @@ config ARCH_HAVE_SPI_BITORDER
 	default n
 
 menuconfig SPI
-	bool "SPI Driver Support"
+	bool "SPI Support"
 	default n
 	---help---
 		This selection enables selection of common SPI options.  This option
@@ -192,7 +192,7 @@ config SPI_TRIGGER
 		not actually begin until SPI_TRIGGER() is called.
 
 config SPI_DRIVER
-	bool "SPI character driver"
+	bool "SPI Master character driver"
 	default n
 	depends on SPI_EXCHANGE
 	---help---

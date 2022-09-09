@@ -60,6 +60,17 @@ extern "C"
 
 int board_spidev_initialize(int bus);
 
+/****************************************************************************
+ * Name: board_spi_slave_dev_initialize
+ *
+ * Description:
+ *   Initialize spi slave driver and register the /dev/spislv[n] device.
+ *
+ ****************************************************************************/
+
+int board_spi_slave_dev_initialize(int bus);
+
+
 #undef EXTERN
 #if defined(__cplusplus)
 }

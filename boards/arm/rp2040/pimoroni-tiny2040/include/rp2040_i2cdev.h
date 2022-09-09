@@ -62,7 +62,7 @@ extern "C"
  *
  ****************************************************************************/
 
-#ifdef CONFIG_RP2040_I2C_DRIVER
+#ifdef CONFIG_I2C_DRIVER
 int board_i2cdev_initialize(int bus);
 #endif
 

@@ -47,6 +47,9 @@ endif
 
 ifeq ($(CONFIG_RP2040_SPI),y)
 CHIP_CSRCS += rp2040_spi.c
+ifeq ($(CONFIG_SPI_SLAVE),y)
+CHIP_CSRCS += rp2040_spi_slave.c
+endif
 endif
 
 ifeq ($(CONFIG_RP2040_PWM),y)

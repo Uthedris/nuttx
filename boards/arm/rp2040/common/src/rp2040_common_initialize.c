@@ -141,8 +141,13 @@ void rp2040_common_initialize(void)
   /* CSn is controlled by board-specific logic */
 
   rp2040_gpio_init(CONFIG_RP2040_SPI0_CS_GPIO);        /* CSn */
+
+#if defined(CONFIG_RP2040_SPI0_SLAVE)
+  rp2040_gpio_setdir(CONFIG_RP2040_SPI0_CS_GPIO, true);
+#elif CONFIG_RP2040_SPI0_CS_GPIO != -1
   rp2040_gpio_setdir(CONFIG_RP2040_SPI0_CS_GPIO, true);
   rp2040_gpio_put(CONFIG_RP2040_SPI0_CS_GPIO, true);
+#endif
 #endif
 
 #ifdef CONFIG_RP2040_SPI1
@@ -155,8 +160,11 @@ void rp2040_common_initialize(void)
 
   /* CSn is controlled by board-specific logic */
 
-  rp2040_gpio_init(CONFIG_RP2040_SPI1_CS_GPIO);        /* CSn */
+#if defined(CONFIG_RP2040_SPI1_SLAVE)
+  rp2040_gpio_setdir(CONFIG_RP2040_SPI1_CS_GPIO, true);
+#elif CONFIG_RP2040_SPI1_CS_GPIO != -1
   rp2040_gpio_setdir(CONFIG_RP2040_SPI1_CS_GPIO, true);
   rp2040_gpio_put(CONFIG_RP2040_SPI1_CS_GPIO, true);
+#endif
 #endif
 }
